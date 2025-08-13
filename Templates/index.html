@@ -1,0 +1,54 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+
+{% block title%} Home {% endblock title%}
+{% block content %}
+<div class="container">
+    <!-- Stories -->
+    <section class="stories">  
+        {% for i in "12" %}
+        <div class="story">
+            <img src="{% static 'img/user.png' %}" alt="User Picture">
+            <p>usernick{{ forloop.counter }}</p>
+        </div>
+        {% endfor %}
+    </section>
+
+    <div class="main-feed">
+        <!-- Posts -->
+        <section class="posts">
+            <div class="post">
+                <div class="post-header">
+                    <img src="{% static 'img/user.png' %}" alt="User Picture">
+                    <span>Jennierubyjane</span>
+                </div>
+                <img src="{% static 'img/BP.jpg' %}" alt="Post Content" class="post-image">
+                <div class="post-actions">
+                    <a href="#"><img src="{% static 'icons/likes.svg' %}" alt="Like" class="icon"></a>
+                    <a href="#"><img src="{% static 'icons/comment.svg' %}" alt="Comment" class="icon"></a>
+                    <a href="#"><img src="{% static 'icons/share.svg' %}" alt="Share" class="icon"></a>
+                </div>
+                <p>Liked by user123 and 73M others</p>
+                <p><strong>Jennierubyjane </strong>ALBUM RUBY</p>
+                <p class="time">30 minutes ago</p>
+            </div>
+        </section>
+
+        <!-- Suggestions -->
+        <aside class="suggestions">
+            <h4>Suggestions for You</h4>
+            {% for i in "160" %}
+            <div class="suggestion">
+                <img src="{% static 'images/user_placeholder.png' %}" alt="User Picture">
+                <div>
+                    <p>usernick{{ i }}</p>
+                    <small>Followed by user1 and others</small>
+                </div>
+                <a href="#">Follow</a>
+            </div>
+            {% endfor %}
+        </aside>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% load static %}
+
+<nav class="navbar">
+    <!-- Left: Logo -->
+    <div class="navbar-left">
+        <a href="/">
+            <img src="{% static 'logo/WEBIO1.png' %}" alt="WEBIO Logo" class="logo-img">
+        </a>
+    </div>
+
+    <!-- Center: Search Bar -->
+    <div class="navbar-center">
+        <div class="search-bar">
+            <input type="text" placeholder="Search" required>
+            <button class="clear-btn" onclick="this.previousElementSibling.value=''">&times;</button>
+        </div>
+    </div>
+
+    <!-- Right: Icons -->
+    <div class="navbar-right">
+        <a href="#"><img src="{% static 'icons/home.svg' %}" alt="Home"></a>
+        <a href="#"><img src="{% static 'icons/message.svg' %}" alt="Messages"></a>
+        <a href="#"><img src="{% static 'icons/add.svg' %}" alt="New Post"></a>
+        <a href="#"><img src="{% static 'icons/likes.svg' %}" alt="Likes"></a>
+        <a href="#"><img src="{% static 'icons/user.png' %}" alt="Profile" class="profile-pic"></a>
+    </div>
+</nav>
