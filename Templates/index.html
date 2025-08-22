@@ -1,54 +1,71 @@
 {% extends 'Base/base.html' %}
 {% load static %}
 
-{% block title%} Home {% endblock title%}
+{% block title %}Home{% endblock %}
+
 {% block content %}
 <div class="container">
-    <!-- Stories -->
-    <section class="stories">  
-        {% for i in "12" %}
-        <div class="story">
+
+  <!-- 🔹 Profile chip (replaces Stories) -->
+  <section class="profile-strip">
+    <div class="profile-chip" style="display:inline-flex; flex-direction:column; align-items:center; gap:6px;">
+      <img src="{% static profile.avatar_path %}" alt="{{ request.user.username }}"
+           style="width:64px; height:64px; border-radius:50%; border:2px solid transparent;
+                  padding:2px; background:
+                  radial-gradient(white 60%, transparent 62%) padding-box,
+                  conic-gradient(#f99, #f3c, #f9c, #fc6, #f99) border-box;">
+      <p style="max-width:80px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; margin:0;">
+        {{ request.user.username }}
+      </p>
+    </div>
+  </section>
+
+  <div class="main-feed">
+    <!-- Posts -->
+    <section class="posts">
+      {% if posts %}
+        {% for p in posts %}
+        <div class="post">
+          <div class="post-header">
             <img src="{% static 'img/user.png' %}" alt="User Picture">
-            <p>usernick{{ forloop.counter }}</p>
+            <span>{{ p.username }}</span>
+          </div>
+
+          <img src="{% static p.image_path %}" alt="Post Content" class="post-image">
+
+          <div class="post-actions">
+            <a href="#"><img src="{% static 'icons/likes.svg' %}" alt="Like" class="icon"></a>
+            <a href="#"><img src="{% static 'icons/comment.svg' %}" alt="Comment" class="icon"></a>
+            <a href="#"><img src="{% static 'icons/share.svg' %}" alt="Share" class="icon"></a>
+          </div>
+
+          <p>Liked by user123 and {{ p.likes_count }} others</p>
+          {% if p.caption %}
+            <p><strong>{{ p.username }}</strong> {{ p.caption }}</p>
+          {% endif %}
+          <p class="time">{{ p.created_at|timesince }} ago</p>
         </div>
         {% endfor %}
+      {% endif %}
     </section>
 
-    <div class="main-feed">
-        <!-- Posts -->
-        <section class="posts">
-            <div class="post">
-                <div class="post-header">
-                    <img src="{% static 'img/user.png' %}" alt="User Picture">
-                    <span>Jennierubyjane</span>
-                </div>
-                <img src="{% static 'img/BP.jpg' %}" alt="Post Content" class="post-image">
-                <div class="post-actions">
-                    <a href="#"><img src="{% static 'icons/likes.svg' %}" alt="Like" class="icon"></a>
-                    <a href="#"><img src="{% static 'icons/comment.svg' %}" alt="Comment" class="icon"></a>
-                    <a href="#"><img src="{% static 'icons/share.svg' %}" alt="Share" class="icon"></a>
-                </div>
-                <p>Liked by user123 and 73M others</p>
-                <p><strong>Jennierubyjane </strong>ALBUM RUBY</p>
-                <p class="time">30 minutes ago</p>
-            </div>
-        </section>
+    <!-- Suggestions -->
+    <aside class="suggestions">
+      <h4>Suggestions for You</h4>
+      {% for u in suggestions %}
+      <div class="suggestion">
+        <img src="{% static 'img/user.png' %}" alt="{{ u.username }}">
+        <div>
+          <p>{{ u.username }}</p>
+          <small>New to WEBIO</small>
+        </div>
+        <a href="#">Follow</a>
+      </div>
+      {% empty %}
+        <!-- no fallback text -->
+      {% endfor %}
+    </aside>
+  </div>
 
-        <!-- Suggestions -->
-        <aside class="suggestions">
-            <h4>Suggestions for You</h4>
-            {% for i in "160" %}
-            <div class="suggestion">
-                <img src="{% static 'images/user_placeholder.png' %}" alt="User Picture">
-                <div>
-                    <p>usernick{{ i }}</p>
-                    <small>Followed by user1 and others</small>
-                </div>
-                <a href="#">Follow</a>
-            </div>
-            {% endfor %}
-        </aside>
-    </div>
 </div>
 {% endblock %}
-
