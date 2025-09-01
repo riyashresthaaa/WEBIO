@@ -1,37 +1,35 @@
-{% extends "Base/base.html" %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'auth_app/login_signup.css' %}">
+<div class="login-signup-main">
+  <div class="login-signup-card">
+    <div class="login-signup-left">
+      
+      
+    </div>
+    <div class="login-signup-right">
+      <img src="{% static 'logo/WEBIO1.png' %}" alt="WEBIO" class="login-signup-logo">
+      <div class="login-signup-welcome">Join WEBIO to get started</div>
+      {% if messages %}
+        <ul class="messages">
+          {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+      <form method="post" class="login-signup-form">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password1" placeholder="Password" required>
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+        <button type="submit" class="login-btn">Sign Up</button>
 
-{% block content %}
-<div class="auth-container">
-  <h2>Create an account</h2>
-
-  {% if messages %}
-    <ul class="messages">
-      {% for m in messages %}<li>{{ m }}</li>{% endfor %}
-    </ul>
-  {% endif %}
-
-  <form method="post" action="">
-    {% csrf_token %}
-    <p>
-      <label for="id_username">Username</label><br>
-      <input type="text" id="id_username" name="username" required>
-    </p>
-    <p>
-      <label for="id_email">Email</label><br>
-      <input type="email" id="id_email" name="email" required>
-    </p>
-    <p>
-      <label for="id_password1">Password</label><br>
-      <input type="password" id="id_password1" name="password1" required>
-    </p>
-    <p>
-      <label for="id_password2">Confirm Password</label><br>
-      <input type="password" id="id_password2" name="password2" required>
-    </p>
-    <button type="submit">Sign Up</button>
-  </form>
-
-  <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        <div class="divider"><span></span><p>or</p><span></span></div>
+        <a href="/accounts/google/login/" class="google-btn">
+          <img src="{% static 'auth_app/google.svg' %}" alt="Google">
+          Sign up with Google
+        </a>
+        <div class="signup-link">Already have an account? <a href="{% url 'login' %}">Login here</a></div>
+      </form>
+    </div>
+  </div>
 </div>
-{% endblock %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

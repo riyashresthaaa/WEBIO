@@ -16,3 +16,5 @@ urlpatterns = [
     # (Optional) public profile by username, e.g. /u/jennie/
     path("u/<str:username>/", views.public_profile_view, name="public_profile"),
 ]
+
+

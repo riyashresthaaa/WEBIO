@@ -1,29 +1,34 @@
-{% extends "Base/base.html" %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'auth_app/login_signup.css' %}">
+<div class="login-signup-main">
+  <div class="login-signup-card">
+    <div class="login-signup-left">
+      
+    </div>
+    <div class="login-signup-right">
+      <img src="{% static 'logo/WEBIO1.png' %}" alt="WEBIO1" class="login-signup-logo">
+      <div class="login-signup-welcome">Welcome</div>
+      {% if messages %}
+        <ul class="messages">
+          {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+      <form method="post" class="login-signup-form">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <a href="#" class="forgot">Forgot password ?</a>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="divider"><span></span><p>or</p><span></span></div>
+        <a href="/accounts/google/login/" class="google-btn">
+          <img src="{% static 'auth_app/google.svg' %}" alt="Google">
+          Login with Google
+        </a>
 
-{% block content %}
-<div class="auth-container">
-  <h2>Login</h2>
-
-  {% if messages %}
-    <ul class="messages">
-      {% for m in messages %}<li>{{ m }}</li>{% endfor %}
-    </ul>
-  {% endif %}
-
-  <form method="post" action="">
-    {% csrf_token %}
-    <p>
-      <label for="id_username">Username</label><br>
-      <input type="text" id="id_username" name="username" required>
-    </p>
-    <p>
-      <label for="id_password">Password</label><br>
-      <input type="password" id="id_password" name="password" required>
-    </p>
-    <button type="submit">Login</button>
-  </form>
-
-  <p>Don’t have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        <div class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></div>
+      </form>
+    </div>
+  </div>
 </div>
-{% endblock %}
+<!-- Optionally add FontAwesome for social icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

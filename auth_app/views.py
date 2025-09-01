@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Profile, Post  # ✅ no Story
+from .models import Profile, Post 
 
 def signup_view(request):
     if request.method == "POST":
@@ -59,7 +59,6 @@ def logout_view(request):
 
 @login_required
 def index_view(request):
-    # ensure a profile exists even if an older user didn’t get one yet
     profile, _ = Profile.objects.get_or_create(user=request.user)
 
     posts = Post.objects.all()
@@ -72,7 +71,6 @@ def index_view(request):
     })
 
 
-# Simple pages you already added earlier (optional):
 @login_required
 def profile_view(request):
     profile, _ = Profile.objects.get_or_create(user=request.user)

@@ -1,14 +1,12 @@
 {% load static %}
 {% if user.is_authenticated %}
 <nav class="navbar">
-  <!-- Left: Logo -->
   <div class="navbar-left">
     <a href="{% url 'index' %}">
       <img src="{% static 'logo/WEBIO1.png' %}" alt="WEBIO Logo" class="logo-img">
     </a>
   </div>
 
-  <!-- Center: Search Bar -->
   <div class="navbar-center">
     <div class="search-bar">
       <input type="text" placeholder="Search" required>
@@ -16,14 +14,12 @@
     </div>
   </div>
 
-  <!-- Right: Icons -->
   <div class="navbar-right">
     <a href="{% url 'index' %}"><img src="{% static 'icons/home.svg' %}" alt="Home"></a>
     <a href="{% url 'messages' %}"><img src="{% static 'icons/message.svg' %}" alt="Messages"></a>
     <a href="{% url 'new_post' %}"><img src="{% static 'icons/add.svg' %}" alt="New Post"></a>
     <a href="{% url 'likes' %}"><img src="{% static 'icons/likes.svg' %}" alt="Likes"></a>
 
-    <!-- Profile leads to your own profile page -->
     <a href="{% url 'profile' %}">
       <img src="{% static 'icons/user.png' %}" alt="Profile" class="profile-pic">
     </a>
